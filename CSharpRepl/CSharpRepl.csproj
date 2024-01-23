@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>0.6.6</Version>
+    <Version>1.0</Version>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <RollForward>LatestMajor</RollForward>
@@ -10,17 +10,17 @@
 
     <Description>A dotnet global tool for a command line C# REPL with syntax highlighting. Explore the language, libraries and NuGet packages interactively.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/waf/CSharpRepl</RepositoryUrl>
+    <RepositoryUrl>https://github.com/evilprince2009/CSharpRepl</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Authors>Will Fuqua</Authors>
+    <Authors>Ibne Nahian</Authors>
     <Company />
 
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>csharprepl</ToolCommandName>
     <PackageTags>repl console cli csharp tool</PackageTags>
     <PackageOutputPath>./nupkg</PackageOutputPath>
-    <PackageProjectUrl>https://github.com/waf/CSharpRepl</PackageProjectUrl>
-    <PackageReleaseNotes>https://github.com/waf/CSharpRepl/blob/main/CHANGELOG.md</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/evilprince2009/CSharpRepl</PackageProjectUrl>
+    <PackageReleaseNotes>https://github.com/evilprince2009/CSharpRepl/blob/main/CHANGELOG.md</PackageReleaseNotes>
     <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
   </PropertyGroup>
 
