@@ -52,7 +52,7 @@ internal sealed class PipedInputEvaluator
             }
         }
 
-        return ExitCodes.Success;
+        return (int)ExitCodes.Success;
     }
 
     /// <summary>
@@ -71,7 +71,7 @@ internal sealed class PipedInputEvaluator
 
         var result = await roslyn.EvaluateAsync(input.ToString());
         return result is EvaluationResult.Success
-            ? ExitCodes.Success
+            ? (int)ExitCodes.Success
             : ErrorCode(result);
     }
 
@@ -83,7 +83,7 @@ internal sealed class PipedInputEvaluator
                 console.WriteErrorLine(err.Exception.Message);
                 return err.Exception.HResult;
             case EvaluationResult.Cancelled:
-                return ExitCodes.ErrorCancelled;
+                return (int)ExitCodes.ErrorCancelled;
             default:
                 throw new InvalidOperationException("Unhandled EvaluationResult type");
         }

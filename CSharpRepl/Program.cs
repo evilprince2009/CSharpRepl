@@ -27,21 +27,21 @@ internal static class Program
     {
         Console.InputEncoding = Encoding.UTF8;
         Console.OutputEncoding = Encoding.UTF8;
-
+       
         // parse command line input
         IConsoleEx console = new SystemConsoleEx();
         var appStorage = CreateApplicationStorageDirectory();
         var configFile = Path.Combine(appStorage, "config.rsp");
 
         if (!TryParseArguments(args, configFile, out var config))
-            return ExitCodes.ErrorParseArguments;
+            return (int)ExitCodes.ErrorParseArguments;
 
         SetDefaultCulture(config);
 
         if (config.OutputForEarlyExit.Text is not null)
         {
             console.WriteLine(config.OutputForEarlyExit);
-            return ExitCodes.Success;
+            return (int)ExitCodes.Success;
         }
 
         // initialize roslyn
@@ -59,7 +59,7 @@ internal static class Program
         else if (config.StreamPipedInput)
         {
             console.WriteErrorLine("--streamPipedInput specified but no redirected input received. This configuration option should be used with redirected standard input.");
-            return ExitCodes.ErrorParseArguments;
+            return (int)ExitCodes.ErrorParseArguments;
         }
 
         // we're being run interactively, start the prompt
@@ -140,7 +140,7 @@ internal static class Program
                    selectedTextBackground: config.Theme.GetSelectedTextBackground(),
                    tabSize: config.TabSize),
                console: console.PrettyPromptConsole);
-            return (prompt, ExitCodes.Success);
+            return (prompt, (int)ExitCodes.Success);
         }
         catch (InvalidOperationException ex) when (ex.Message.EndsWith("error code: 87", StringComparison.Ordinal))
         {
@@ -150,21 +150,21 @@ internal static class Program
                     ? @"This requires at least Windows 10 version 1511 (build number 10586) and ""Use legacy console"" to be disabled in the Command Prompt." + Environment.NewLine
                     : string.Empty)
             );
-            return (null, ExitCodes.ErrorAnsiEscapeSequencesNotSupported);
+            return (null, (int)ExitCodes.ErrorAnsiEscapeSequencesNotSupported);
         }
         catch (InvalidOperationException ex) when (ex.Message.EndsWith("error code: 6", StringComparison.Ordinal))
         {
             Console.Error.WriteLine("Failed to initialize prompt. Invalid output mode -- is output redirected?");
-            return (null, ExitCodes.ErrorInvalidConsoleHandle);
+            return (null, (int)ExitCodes.ErrorInvalidConsoleHandle);
         }
     }
 }
 
-internal static class ExitCodes
-{
-    public const int Success = 0;
-    public const int ErrorParseArguments = 1;
-    public const int ErrorAnsiEscapeSequencesNotSupported = 2;
-    public const int ErrorInvalidConsoleHandle = 3;
-    public const int ErrorCancelled = 3;
-}
+//internal static class ExitCodes
+//{
+//    public const int Success = 0;
+//    public const int ErrorParseArguments = 1;
+//    public const int ErrorAnsiEscapeSequencesNotSupported = 2;
+//    public const int ErrorInvalidConsoleHandle = 3;
+//    public const int ErrorCancelled = 4;
+//}
