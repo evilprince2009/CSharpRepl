@@ -7,4 +7,3 @@ internal enum ExitCodes
     ErrorInvalidConsoleHandle,
     ErrorCancelled
 }
-    
